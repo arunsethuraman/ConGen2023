@@ -293,7 +293,7 @@ What do you determine? Do you find any outlier loci? If you were interpreting th
 What if you had done the same analyses, but with a different q threshold? If you were only using the Tajima's D/Fst/Diversity outliers, how would your inference change?
 
 
-# ConGen2022 - Part 2: PPP - The PopGen Pipeline Platform
+# ConGen2023 - Part 2: PPP - The PopGen Pipeline Platform
 Arun Sethuraman, PhD
 San Diego State University
 asethuraman@sdsu.edu
