@@ -15,10 +15,9 @@ Twitter: @arunsethuraman
 3. Input files - accessible on the Box page under Lecture Materials > Arun Sethuraman > Hands-on Files
 
 # Exercise 0 - Reviewing tests of HWE, LD, Differentiation
-In the original study by Rutledge et al., 2015 (https://doi.org/10.1098/rsbl.2015.0303), the authors look at population genetic structure in wolves and coyotes from North America using a large RADseq based dataset. Their results provide evidence of a unique structured population of Eastern wolves, as well as reject hybrid origins of Eastern coyotes. 
+We will be using the data from Bataillon et al. 2015 (Bataillon, T., Duan, J., Hvilsom, C., Jin, X., Li, Y., Skov, L., Glemin, S., Munch, K., Jiang, T., Qian, Y. and Hobolth, A., 2015. Inference of purifying and positive selection in three subspecies of chimpanzees (Pan troglodytes) from exome sequencing. Genome biology and evolution, 7(4), pp.1122-1132.) for this exercise. You can download the VCF file here: http://datadryad.org/resource/doi:10.5061/dryad.56m2g or the SNP file is available as "chimps.vcf" in the Hands-on Files folder.
 
-![image](https://github.com/arunsethuraman/ConGen2023/assets/5439390/8cf6d259-b8a1-42b6-a330-0d9d61d7181b)
-
+Back story - this study analyzes whole exome data from three subspecies of chimpanzees - Pan troglodytes troglodytes (Central), P.t.verus (Western), and P.t.schweinfurthii (Eastern) which have very distinctive geographical ranges separated by large river systems in Africa, and have not been observed to hybridize in the wild with each other, or with Pan paniscus (Bonobos, but genomic evidence states otherwise!). Nonetheless, chimpanzee numbers are dwindling in the wild, with estimates of effective population sizes between 22,000 - 27,000 (Fischer et al., 2004, Sethuraman and Hey 2016, Won and Hey 2005).
 
 ![image](https://user-images.githubusercontent.com/5439390/132733181-192de700-0c7f-409c-aedb-621b9e674bed.png)
 
@@ -339,4 +338,12 @@ vcf_to_treemix.py --vcf chimps.vcf.gz --model-file 3pop.model --modelname 3pop -
 
 # Exercise 
 Time to get creative - write a PPP pipeline to perform a set of analyses that you envision would work with your own data (assuming that you are all working with VCF files here). Let's chat!
+
+
+
+
+
+
+
+
 
