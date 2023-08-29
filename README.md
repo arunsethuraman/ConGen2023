@@ -339,6 +339,38 @@ vcf_to_treemix.py --vcf chimps.vcf.gz --model-file 3pop.model --modelname 3pop -
 # Exercise 
 Time to get creative - write a PPP pipeline to perform a set of analyses that you envision would work with your own data (assuming that you are all working with VCF files here). Let's chat!
 
+# ConGen2023 - Part 3: Using IMa3 for estimation of demographic history under the Isolation with Migration Model
+
+You’ve been provided with an IMa3 formatted input file “verustrog200_IMa3.u” – let’s first look at this file, and understand how this was constructed.
+
+-i  specifies the input file
+
+-o specifies the name for the output file(s)
+
+-s random number seed
+
+-r25 specifies some run parameters
+
+-b specifies the length of the “burn-in” period
+
+-l specifies the length of the “run” after “burn-in”
+
+-q specifies an upper limit on theta(s)
+
+-m specifies an upper limit on migration rate(s)
+
+-t specifies an upper limit on the divergence time(s)
+
+-hfg -ha0.99 -hb0.3 - specifies how to run the method
+
+To run IMa3, type:
+```Shell
+IMa3 -i verustrog200_IMa3.u -o example1.out -b100 -l100 -q10 -m10 -t10 -s124 -r25 -hfg -ha0.99 -hb0.3 -hn10
+```
+
+Let’s look at the output files produced (also see sample output file provided for a long run), and understand how to interpret these results, and generate your own plots based on the M mode run, then based on the L mode run.
+
+Let’s then discuss some possible models that can be tested using the LLR test of Nielsen and Wakeley 2001.
 
 
 
