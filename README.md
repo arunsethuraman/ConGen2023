@@ -36,7 +36,7 @@ Further references:
 cd /home/username/
 mkdir chimps
 cd chimps
-cp /home/instructor_materials/Arun_Sethuraman/* .
+cp /home/Instructor_Lecture_Materials_and_Hands-on/Arun_Sethuraman/2023/copy_um_box/Hands-on Files/* .
 ```
 
 2. Compute heterozygosity across the entire file
