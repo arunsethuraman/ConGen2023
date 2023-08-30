@@ -36,7 +36,7 @@ Further references:
 cd /home/username/
 mkdir chimps
 cd chimps
-cp /home/Instructor_Lecture_Materials_and_Hands-on/Arun_Sethuraman/2023/copy_um_box/Hands-on Files/* .
+cp /home/Instructor_Lecture_Materials_and_Hands-on/Arun_Sethuraman/2023/copy_um_box/Hands-on\ Files/* .
 ```
 
 2. Compute heterozygosity across the entire file
@@ -228,7 +228,7 @@ This tutorial has been adapted from the OutFLANK vignette that can be accessed h
 First things first, we need to filter our dataset (chimps.vcf) for excessive degrees of missingness, and deviations from HWE prior to running OutFLANK analyses. So to do this, go to your Terminal.
 
 ```Shell
-vcftools --vcf chimps.vcf --hwe 0.05 --max-missing 0.25 --exclude exclude.txt --recode
+vcftools --vcf chimps.vcf --hwe 0.05 --max-missing 0.25 --recode
 ```
 
 This should create a new filtered VCF file called "out.recode.vcf" in your folder. What do you notice about the number of SNP's in this new file?
