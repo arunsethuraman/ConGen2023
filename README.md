@@ -341,6 +341,75 @@ Time to get creative - write a PPP pipeline to perform a set of analyses that yo
 
 # ConGen2023 - Part 3: Using IMa3 for estimation of demographic history under the Isolation with Migration Model
 
+The Isolation with Migration (IM) class of models (Nielsen and Wakeley 2001) have been utilized extensively since their inception as a framework for inferring evolutionary history of species and populations. 
+
+<img width="220" alt="image" src="https://github.com/arunsethuraman/ConGen2023/assets/5439390/87264b6c-6549-4274-be62-6e3b9115eb46">
+
+
+The IM model is ideal for scenarios where you sample and genotype/sequence individuals from:
+(a)	two or more species that are hypothesized to be speciating allopatrically, with continued gene flow
+(b)	two or more populations that are structured/admixed
+(c)	hybrid species
+(d)	species with secondary contact
+(e)	species/populations with hybridization/admixture with unsampled ghost populations
+Alternately, if you’re a data-up person, IMa3 (and MigSelect, IMa2p) are ideal for analyses of multi-locus genetic/genomic/haplotypic data generated using (a) whole genomic sequencing, (b) Sanger sequencing of individual loci, both nuclear and organellar, (c) RADseq (and variants of it), (d) microsatellite genotyping, to name a few.
+Importantly, IMa3 (and the IM class of programs) generate evolutionary history, estimated as effective population sizes (or scaled as population mutation rates), divergence times, and migration rates by sampling genealogies (for more details on the broader class of genealogy samplers, see Kuhner 2009). Other genealogy samplers include LAMARC (Kuhner 2006), MIGRATE-n (Beerli and Felsenstein 2001), MIST (Chung and Hey 2017), MDIV (Nielsen and Wakeley 2001), IM (Hey and Nielsen 2004), IMa2 (Hey and Nielsen 2007, Hey 2009). They all broadly utilize a Bayesian (Metropolis-Coupled) Markov Chain Monte Carlo (MCMCMC) algorithm to sample genealogies guided by an evolutionary tree to estimate/approximate the posterior density distribution of evolutionary parameters. They all harken back to the model of Felsenstein 1981:
+
+<img width="265" alt="image" src="https://github.com/arunsethuraman/ConGen2023/assets/5439390/c9588ca1-259a-4f4c-a2aa-9df0002531de">
+
+Consider an alternative expression, that also integrates over G , but that directly yields a posterior probability of Θ
+
+<img width="229" alt="image" src="https://github.com/arunsethuraman/ConGen2023/assets/5439390/bea8c2ee-ab11-47d5-a6c8-29909217d935">
+
+This is an expectation of P(Θ |G) and can be approximated given a sample of genealogies drawn at random from the posterior distribution of G, P(G | X) 
+
+<img width="166" alt="image" src="https://github.com/arunsethuraman/ConGen2023/assets/5439390/3235df2b-6212-433b-bf2b-d5661a825618">
+
+<img width="141" alt="image" src="https://github.com/arunsethuraman/ConGen2023/assets/5439390/71d8e1c2-5c5f-4fe7-aa66-0d426afceab1">
+  
+This step does not depend on the data, X.  All the information in the date is contained in the sample drawn from P(G|X)
+Yields an analytic function, different from Nielsen & Wakeley (2001) approach which estimates the probability from the residence times in the MCMC
+Using MCMC to generate samples of genealogies drawn from P(G|X)
+
+<img width="247" alt="image" src="https://github.com/arunsethuraman/ConGen2023/assets/5439390/d03cd702-9261-40ed-9e01-c61e2dbe540a">
+
+•	It is not difficult to calculate P(X|G). 
+•	But how to calculate the prior probability of G, P(G) ?
+•	In fact this can be calculated analytically for the main demographic components of Θ, assuming a uniform prior for Θ
+
+<img width="159" alt="image" src="https://github.com/arunsethuraman/ConGen2023/assets/5439390/68072bf5-d23a-4b64-b96b-7d01b02b2123">
+
+In short, the sequence of operations performed are:
+•	Run a Markov chain over G and generate random samples from P(G | X) 
+•	For each G drawn from this distribution, save P(G)  and all necessary information for calculating P(G|Θ).
+•	Build a function that approximates the posterior density of Θ
+
+<img width="184" alt="image" src="https://github.com/arunsethuraman/ConGen2023/assets/5439390/592807c8-32cb-4f3c-9ec8-13b82a5ed92a">
+
+•	This is an analytic function, and can be evaluated for any value of Θ 
+•	The function can be differentiated and searched for maxima. 
+
+However, these computations and sampling along Metropolis Coupled Markov Chains can be potentially slow and difficult to reach “convergence” or “stationarity”, especially with a large number of (a) loci, (b) individuals, (c) sampled populations. An excellent and straightforward strategy to leverage the power of parallel processing and modern-day high performance computing (HPC) facilities is to distribute these Metropolis Coupled Markov Chains among multiple processors, or “threads”. The most important part of this strategy is to ensure that the sampling process is synchronized across chains. IMa3’s parallel algorithm strategically handles these scenarios of computational difficulties with parallelization, details of which are described in Sethuraman and Hey 2016.
+
+<img width="295" alt="image" src="https://github.com/arunsethuraman/ConGen2023/assets/5439390/c668c7e6-4be9-41d5-aed3-7349bb4749dd">
+
+<img width="238" alt="image" src="https://github.com/arunsethuraman/ConGen2023/assets/5439390/a151d526-0913-4237-a9c6-a13840ff88ac">
+
+What’s cool about IMa2p and IMa3? Fast, faster, faster…
+
+<img width="289" alt="image" src="https://github.com/arunsethuraman/ConGen2023/assets/5439390/0bb18a97-4b90-40f6-8625-68c6b5318e86">
+
+ 
+My goals in this workshop are manifold:
+(a)	help you understand the fundamental algorithm, and parameters estimated by IMa3
+(b)	describe installation, and computational considerations while working with IMa3
+(c)	describe all command line options in IMa3, and their individual utilities, by working through some previously simulated examples
+(d)	understand the output files produced by IMa3, and how to interpret them, as well as build your own plots of density distributions in R
+(e)	work through a real life “work-flow”, starting with whole-genomic data, downloaded as a VCF file from The Great Ape Genome Project to estimate the evolutionary history of two species – Pan troglodytes troglodytes, and Pan troglodytes verus. 
+(f)	provide suggestions for how you should set up IMa3 runs with your own data
+(g)	briefly introduce IMGui (Knoblauch et al. 2017), and IMfig programs
+(h)	and if we have more time, work through an example of simulating your own genomic data with ms (Hudson 2002) under an IM model, and running IMa3 analyses on these simulated data.
+
 You’ve been provided with an IMa3 formatted input file “verustrog200_IMa3.u” – let’s first look at this file, and understand how this was constructed.
 
 -i  specifies the input file
@@ -368,9 +437,11 @@ To run IMa3, type:
 IMa3 -i verustrog200_IMa3.u -o example1.out -b100 -l100 -q10 -m10 -t10 -s124 -r25 -hfg -ha0.99 -hb0.3 -hn10
 ```
 
-Let’s look at the output files produced (also see sample output file provided for a long run), and understand how to interpret these results, and generate your own plots based on the M mode run, then based on the L mode run.
+Let’s look at the output files produced (also see sample output file provided for a long run), and understand how to interpret these results.
 
-Let’s then discuss some possible models that can be tested using the LLR test of Nielsen and Wakeley 2001.
+![verustrogdensities](https://github.com/arunsethuraman/ConGen2023/assets/5439390/d19b688b-a288-48db-83a3-58a3c77cd874)
+
+Let’s then discuss some possible models that can be tested using the LLR test of Nielsen and Wakeley 2001 (in the L mode of IMa3).
 
 
 
