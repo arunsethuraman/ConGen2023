@@ -299,7 +299,7 @@ San Diego State University
 asethuraman@sdsu.edu
 Twitter: @arunsethuraman
 
-Let's be real - it is becoming increasingly difficult to create reproducible workflows in population genomics. We developed the Popgen Pipeline Platform (PPP) - https://ppp.readthedocs.io/en/latest/index.html with the goal of reducing the computational expertise required for conducting population genomic analyses. The PPP was designed as a collection of scripts that facilitate common population genomic workflows in a consistent and standardized environment. Functions were developed to encompass entire workflows, including: input preparation, file format conversion, various population genomic analyses, and output generation. By facilitating entire workflows, the PPP offers several benefits to prospective end users - it reduces the need of redundant in-house software and scripts that would require development time and may be error-prone, or incorrect, depending on the expertise of the investigator. The platform has also been developed with reproducibility and extensibility of analyses in mind. Better yet, coming 2022 - we have a new Galaxy Project (www.usegalaxy.org) implementation of PPP, which will make your population genomic analyses that much easier with an accessible web-browser based GUI.
+Let's be real - it is becoming increasingly difficult to create reproducible workflows in population genomics. We developed the Popgen Pipeline Platform (PPP) - https://ppp.readthedocs.io/en/latest/index.html with the goal of reducing the computational expertise required for conducting population genomic analyses. The PPP was designed as a collection of scripts that facilitate common population genomic workflows in a consistent and standardized environment. Functions were developed to encompass entire workflows, including: input preparation, file format conversion, various population genomic analyses, and output generation. By facilitating entire workflows, the PPP offers several benefits to prospective end users - it reduces the need of redundant in-house software and scripts that would require development time and may be error-prone, or incorrect, depending on the expertise of the investigator. The platform has also been developed with reproducibility and extensibility of analyses in mind. Better yet, coming 2023 - we have a new Galaxy Project (www.usegalaxy.org) implementation of PPP, which will make your population genomic analyses that much easier with an accessible web-browser based GUI.
 
 # Structure of PPP
 
@@ -410,7 +410,7 @@ My goals in this workshop are manifold:
 (g)	briefly introduce IMGui (Knoblauch et al. 2017), and IMfig programs
 (h)	and if we have more time, work through an example of simulating your own genomic data with ms (Hudson 2002) under an IM model, and running IMa3 analyses on these simulated data.
 
-You’ve been provided with an IMa3 formatted input file “verustrog200_IMa3.u” – let’s first look at this file, and understand how this was constructed.
+You’ve been provided with an IMa3 formatted input file “wonhey.u” – let’s first look at this file, and understand how this was constructed.
 
 -i  specifies the input file
 
@@ -435,8 +435,8 @@ You’ve been provided with an IMa3 formatted input file “verustrog200_IMa3.u�
 To run IMa3, type:
 ```Shell
 #Copy the IMa3 input file to your folder
-cp /home/Instructor_Lecture_Materials_and_Hands-on/Arun_Sethuraman/2023/copy_um_box/Hands-on\ Files/verustrog200_IMa3.u .
-IMa3 -i verustrog200_IMa3.u -o example1.out -b100 -l100 -q10 -m10 -t10 -s124 -r25 -hfg -ha0.99 -hb0.3 -hn10
+cp /home/Instructor_Lecture_Materials_and_Hands-on/Arun_Sethuraman/2023/copy_um_box/Hands-on\ Files/wonhey.u .
+IMa3 -i wonhey.u -o example1.out -b100 -l100 -q10 -m10 -t10 -s124 -r25 -hfg -ha0.99 -hb0.3 -hn10
 ```
 
 Let’s look at the output files produced (also see sample output file provided for a long run), and understand how to interpret these results.
