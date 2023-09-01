@@ -434,6 +434,8 @@ You’ve been provided with an IMa3 formatted input file “verustrog200_IMa3.u�
 
 To run IMa3, type:
 ```Shell
+#Copy the IMa3 input file to your folder
+cp /home/Instructor_Lecture_Materials_and_Hands-on/Arun_Sethuraman/2023/copy_um_box/Hands-on\ Files/verustrog200_IMa3.u .
 IMa3 -i verustrog200_IMa3.u -o example1.out -b100 -l100 -q10 -m10 -t10 -s124 -r25 -hfg -ha0.99 -hb0.3 -hn10
 ```
 
